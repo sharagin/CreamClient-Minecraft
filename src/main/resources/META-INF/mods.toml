@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="MIT"
+
+[[mods]]
+modId="creamclient"
+version="1.0.0"
+displayName="CreamClient"
+authors="CreamClient"
+description='''
+Custom lime-themed Minecraft Forge 1.16.5 client with thin typography, ASCII main menu banner, HUD overlay, and ClickGUI.
+'''
+
+[[dependencies.creamclient]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.creamclient]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5,1.17)"
+    ordering="NONE"
+    side="CLIENT"
