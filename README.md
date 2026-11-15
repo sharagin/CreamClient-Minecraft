@@ -1,95 +1,279 @@
+<div align="center">
 
+<h1>✧ CreamClient ✧</h1>
 
-# CreamClient
+<p><strong>Кастомный клиент-мод для Minecraft Forge 1.16.5 с лаймовой эстетикой, 3D-визуалами, переработанными меню и гибкой кастомизацией</strong></p>
 
-**Кастомный клиент-мод для Minecraft Forge 1.16.5 с лаймовой эстетикой, 3D-визуалами, переработанными меню и гибкой кастомизацией**
+<p>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft"><img src="https://img.shields.io/badge/Minecraft-1.16.5-A3FF12?style=flat-square&logo=minecraft&logoColor=white&labelColor=1a1a1a" alt="Minecraft 1.16.5"></a>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft"><img src="https://img.shields.io/badge/Forge-36.2.42-A3FF12?style=flat-square&logo=curseforge&logoColor=white&labelColor=1a1a1a" alt="Forge 36.2.42"></a>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft"><img src="https://img.shields.io/badge/Java-8-A3FF12?style=flat-square&logo=openjdk&logoColor=white&labelColor=1a1a1a" alt="Java 8"></a>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft"><img src="https://img.shields.io/badge/Gradle-Build-A3FF12?style=flat-square&logo=gradle&logoColor=white&labelColor=1a1a1a" alt="Gradle"></a>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft"><img src="https://img.shields.io/badge/version-1.0-A3FF12?style=flat-square&labelColor=1a1a1a" alt="version 1.0"></a>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft"><img src="https://img.shields.io/badge/license-MIT-A3FF12?style=flat-square&labelColor=1a1a1a" alt="license MIT"></a>
+</p>
 
-[https://img.shields.io/badge/MC-1.16.5-a3ff12?style=flat-square&logo=minecraft&logoColor=0a0d0a&labelColor=141b14]
-[https://img.shields.io/badge/Forge-36.2.42-a3ff12?style=flat-square&labelColor=141b14]
-[https://img.shields.io/badge/v1.0-a3ff12?style=flat-square&labelColor=141b14]
-[[https://img.shields.io/github/actions/workflow/status/sharagin/CreamClient-Minecraft/build.yml?style=flat-square&label=Build&color=a3ff12&labelColor=141b14]](https://github.com/sharagin/CreamClient-Minecraft/actions)
-[[https://img.shields.io/github/stars/sharagin/CreamClient-Minecraft?style=flat-square&color=a3ff12&labelColor=141b14]](https://github.com/sharagin/CreamClient-Minecraft/stargazers)
-[[https://skillicons.dev/icons?i=java,gradle,github,githubactions,discord&theme=dark]](https://github.com/sharagin/CreamClient-Minecraft)
+<p>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft/actions"><img src="https://img.shields.io/github/actions/workflow/status/sharagin/CreamClient-Minecraft/build.yml?style=flat-square&label=build&labelColor=1a1a1a&color=A3FF12" alt="Build"></a>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft/stargazers"><img src="https://img.shields.io/github/stars/sharagin/CreamClient-Minecraft?style=flat-square&labelColor=1a1a1a&color=A3FF12" alt="Stars"></a>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft/network/members"><img src="https://img.shields.io/github/forks/sharagin/CreamClient-Minecraft?style=flat-square&labelColor=1a1a1a&color=A3FF12" alt="Forks"></a>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft/issues"><img src="https://img.shields.io/github/issues/sharagin/CreamClient-Minecraft?style=flat-square&labelColor=1a1a1a&color=A3FF12" alt="Issues"></a>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft/commits"><img src="https://img.shields.io/github/last-commit/sharagin/CreamClient-Minecraft?style=flat-square&labelColor=1a1a1a&color=A3FF12" alt="Last commit"></a>
+</p>
 
-## Технологический стек
+<p>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft"><strong>Репозиторий</strong></a> ·
+  <a href="https://github.com/sharagin/CreamClient-Minecraft/actions"><strong>Сборка в Actions</strong></a> ·
+  <a href="https://github.com/sharagin/CreamClient-Minecraft/releases"><strong>Скачать релиз</strong></a>
+</p>
 
-
-
-
-
-
-
-
-
-
-[Репозиторий](https://github.com/sharagin/CreamClient-Minecraft) | [Сборка в Actions](https://www.google.com/search?q=https://github.com/sharagin/CreamClient-Minecraft/actions) | [Скачать релиз](https://www.google.com/search?q=https://github.com/sharagin/CreamClient-Minecraft/releases)
-
-```text
+<pre>
   ✧  ╭───────────────────────────────────────╮  ✧
-     │   ▄████▄  ██▀███  ▓█████ ▄▄▄   ██▄ ██ │   
+     │   ▄████▄  ██▀███  ▓█████ ▄▄▄   ██▄ ██ │
   ⋆  │  ▒██▀ ▀█ ▓██ ▒ ██▒▓█   ▀▒████▄ ▓██▒██ │  ⋆
-     │  ▒▓█   ▄ ▓██ ░▄█ ▒▒███  ▒██ ▀█▄▓██░██ │   
+     │  ▒▓█   ▄ ▓██ ░▄█ ▒▒███  ▒██ ▀█▄▓██░██ │
   ✧  │  ▒▓▓▄██▒ ▒██▀▀█▄  ▒▓█  ▄░██▄▄██▒██ ██ │  ✧
-     ╰───────  ♡  c r e a m  c l i e n t  ♡  ─╯   
-```
+     ╰───────  ♡  c r e a m  c l i e n t  ♡  ─╯
+</pre>
 
-## Ключевые особенности и архитектура
+</div>
 
-* **Чистый Forge без Mixin-конфликтов:** вся графика, хуки экранов и 3D-рендеринг построены на стандартной шине событий `MinecraftForge.EVENT_BUS`, благодаря чему мод стабильно работает с другими Forge-модами и ресурспаками.
-* **Плавная физика интерфейса:** переходы меню, раскрытие ClickGUI, переключение модулей и перемещение рамки хотбара используют сглаживание `easeOutCubic` и `lerp` с настраиваемой скоростью.
-* **Чёткая типографика с выбором:** шрифт `CreamHD` растеризуется в повышенном разрешении (`size 15.0`, `oversample 8.0`) и масштабируется через `MatrixStack`, что убирает размытие; в любой момент можно переключиться на классический `Vanilla` шрифт.
-* **Кастомные экраны целиком:** переработаны `CreamMainMenuScreen` (созвездия, логотип, кнопка GitHub), `CreamMultiplayerScreen` (список серверов и прямой вход по IP), `CreamOptionsScreen`, `CreamPauseScreen`, а также тёмно-лаймовое оформление инвентаря и контейнеров.
-* **Нативный Discord Rich Presence без DLL:** клиент напрямую общается с Discord Desktop через Windows Named Pipe (`\\.\pipe\discord-ipc-*`), безопасно обновляя статус игрока в главном потоке.
-* **Чёрный игровой курсор:** при открытии любого меню системный указатель скрывается через `GLFW`, а поверх интерфейса рисуется кастомный PNG-курсор с акцентной обводкой.
-* **Мультиязычность (`RU` / `EN` / `UK`):** переключение языка переводит меню, настройки и подсказки на лету без перезапуска игры.
+<hr>
 
-## Цветовые палитры и режимы
+<h2 id="toc">📖 Содержание</h2>
 
-В разделе **ClickGUI → Interface → Appearance** доступны 7 палитр и 3 динамических режима (`Breathing`, `Rainbow`, `Static`), которые меняют цвет интерфейса, курсора, хотбара и 3D-эффектов одновременно:
+<ul>
+  <li><a href="#features">✨ Ключевые особенности и архитектура</a></li>
+  <li><a href="#palettes">🎨 Цветовые палитры и режимы</a></li>
+  <li><a href="#modules">🧩 Модули и настройки</a></li>
+  <li><a href="#hotkeys">⌨️ Горячие клавиши и управление</a></li>
+  <li><a href="#custom">🖼️ Фон, музыка и свой шрифт</a></li>
+  <li><a href="#structure">📁 Структура проекта</a></li>
+  <li><a href="#build">⚙️ Сборка и установка</a></li>
+</ul>
 
-| Палитра | Основной HEX | Характер |
-| :--- | :--- | :--- |
-| **Lime** | `#A3FF12` | Фирменный неоново-лаймовый |
-| **Citrus** | `#FF9F1C` | Тёплый цитрусово-апельсиновый |
-| **Mint** | `#2EFFB2` | Холодный мятный |
-| **CyberCyan** | `#00E5FF` | Яркий кибер-голубой |
-| **Amethyst** | `#C06CFF` | Неоновый фиолетовый |
-| **Crimson** | `#FF3B5C` | Насыщенный малиново-красный |
-| **CreamGold** | `#FFD166` | Мягкий кремово-золотой |
+<hr>
 
-## Модули и настройки
+<h2 id="features">✨ Ключевые особенности и архитектура</h2>
 
-| Категория | Модули | Основные параметры |
-| :--- | :--- | :--- |
-| **Visuals** | `ParticleAura`, `HitParticles`, `TargetRing`, `BlockOverlay`, `ChinaHat`, `JumpCircles`, `Trails`, `BoxESP`, `CustomFog`, `TimeChanger`, `NoWeather`, `ViewModel`, `Fullbright`, `NoHurtCam`, `Zoom` | Радиус и скорость колец, число частиц ауры и искр, длительность шлейфа, цвет тумана RGB, смещение и масштаб руки, время суток, зум на `C` |
-| **HUD** | `Watermark`, `TargetHUD`, `SessionInfo`, `ScreenGlow`, `CustomHotbar`, `Coordinates`, `Keystrokes`, `ModuleList`, `ArmorHUD`, `PotionHUD`, `Speedometer`, `Crosshair` | Логотип, FPS, Ping, биом, счётчик CPS (`LMB`/`RMB`), интенсивность свечения по краям, размер прицела |
-| **Movement** | `ToggleSprint`, `AutoRespawn` | Автоматический спринт при движении вперёд и мгновенный респаун |
-| **Interface** | `Appearance`, `CustomMenus`, `BlackCursor`, `DiscordRPC` | Палитра, `ColorMode`, шрифт, язык, прозрачность панелей, скорость анимаций, показ сервера и ника в Discord |
-| **Media** | `Background`, `MenuMusic` | Выбор фона (`DefaultImage` / `Animated` / `CustomImage`), затемнение фона, громкость музыки |
+<table>
+  <thead>
+    <tr>
+      <th align="left">Фича</th>
+      <th align="left">Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>🧬 <strong>Чистый Forge без Mixin-конфликтов</strong></td>
+      <td>Вся графика, хуки экранов и 3D-рендеринг построены на стандартной шине событий <code>MinecraftForge.EVENT_BUS</code>, благодаря чему мод стабильно работает с другими Forge-модами и ресурспаками.</td>
+    </tr>
+    <tr>
+      <td>🌀 <strong>Плавная физика интерфейса</strong></td>
+      <td>Переходы меню, раскрытие ClickGUI, переключение модулей и перемещение рамки хотбара используют сглаживание <code>easeOutCubic</code> и <code>lerp</code> с настраиваемой скоростью.</td>
+    </tr>
+    <tr>
+      <td>🔤 <strong>Чёткая типографика с выбором</strong></td>
+      <td>Шрифт <code>CreamHD</code> растеризуется в повышенном разрешении (<code>size 15.0</code>, <code>oversample 8.0</code>) и масштабируется через <code>MatrixStack</code>, что убирает размытие; в любой момент можно переключиться на классический <code>Vanilla</code> шрифт.</td>
+    </tr>
+    <tr>
+      <td>🪟 <strong>Кастомные экраны целиком</strong></td>
+      <td>Переработаны <code>CreamMainMenuScreen</code> (созвездия, логотип, кнопка GitHub), <code>CreamMultiplayerScreen</code> (список серверов и прямой вход по IP), <code>CreamOptionsScreen</code>, <code>CreamPauseScreen</code>, а также тёмно-лаймовое оформление инвентаря и контейнеров.</td>
+    </tr>
+    <tr>
+      <td>🎧 <strong>Нативный Discord Rich Presence без DLL</strong></td>
+      <td>Клиент напрямую общается с Discord Desktop через Windows Named Pipe (<code>\\.\pipe\discord-ipc-*</code>), безопасно обновляя статус игрока в главном потоке.</td>
+    </tr>
+    <tr>
+      <td>🖱️ <strong>Чёрный игровой курсор</strong></td>
+      <td>При открытии любого меню системный указатель скрывается через <code>GLFW</code>, а поверх интерфейса рисуется кастомный PNG-курсор с акцентной обводкой.</td>
+    </tr>
+    <tr>
+      <td>🌐 <strong>Мультиязычность</strong> (<code>RU</code> / <code>EN</code> / <code>UK</code>)</td>
+      <td>Переключение языка переводит меню, настройки и подсказки на лету без перезапуска игры.</td>
+    </tr>
+  </tbody>
+</table>
 
-## Горячие клавиши и управление
+<hr>
 
-| Клавиша / Действие | Назначение |
-| :--- | :--- |
-| **`Right Shift`** | Открыть или закрыть ClickGUI |
-| **`C`** | Плавный оптический зум камеры (`Zoom`) |
-| **`ЛКМ`** в ClickGUI | Включить/выключить модуль, переключить режим или двигать слайдер |
-| **`ПКМ`** в ClickGUI | Раскрыть или свернуть дополнительные настройки модуля |
-| **`Колёсико мыши`** | Вертикальная прокрутка колонок ClickGUI |
-| **`ESC`** | Сохранить конфиг в `.minecraft/config/creamclient.json` и закрыть меню |
+<h2 id="palettes">🎨 Цветовые палитры и режимы</h2>
 
-## Кастомный фон, музыка и свой шрифт
+<p>В разделе <strong>ClickGUI → Interface → Appearance</strong> доступны <strong>7 палитр</strong> и <strong>3 динамических режима</strong> (<code>Breathing</code>, <code>Rainbow</code>, <code>Static</code>), которые меняют цвет интерфейса, курсора, хотбара и 3D-эффектов одновременно.</p>
 
-После первого запуска клиент создаёт рабочие папки в директории игры (`%appdata%\.minecraft\creamclient\`):
+<table>
+  <thead>
+    <tr>
+      <th align="left">Палитра</th>
+      <th align="center">Цвет</th>
+      <th align="left">Основной HEX</th>
+      <th align="left">Характер</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Lime</strong></td>
+      <td align="center"><img src="https://img.shields.io/badge/-A3FF12-A3FF12?style=flat-square" alt="Lime"></td>
+      <td><code>#A3FF12</code></td>
+      <td>Фирменный неоново-лаймовый</td>
+    </tr>
+    <tr>
+      <td><strong>Citrus</strong></td>
+      <td align="center"><img src="https://img.shields.io/badge/-FF9F1C-FF9F1C?style=flat-square" alt="Citrus"></td>
+      <td><code>#FF9F1C</code></td>
+      <td>Тёплый цитрусово-апельсиновый</td>
+    </tr>
+    <tr>
+      <td><strong>Mint</strong></td>
+      <td align="center"><img src="https://img.shields.io/badge/-2EFFB2-2EFFB2?style=flat-square" alt="Mint"></td>
+      <td><code>#2EFFB2</code></td>
+      <td>Холодный мятный</td>
+    </tr>
+    <tr>
+      <td><strong>CyberCyan</strong></td>
+      <td align="center"><img src="https://img.shields.io/badge/-00E5FF-00E5FF?style=flat-square" alt="CyberCyan"></td>
+      <td><code>#00E5FF</code></td>
+      <td>Яркий кибер-голубой</td>
+    </tr>
+    <tr>
+      <td><strong>Amethyst</strong></td>
+      <td align="center"><img src="https://img.shields.io/badge/-C06CFF-C06CFF?style=flat-square" alt="Amethyst"></td>
+      <td><code>#C06CFF</code></td>
+      <td>Неоновый фиолетовый</td>
+    </tr>
+    <tr>
+      <td><strong>Crimson</strong></td>
+      <td align="center"><img src="https://img.shields.io/badge/-FF3B5C-FF3B5C?style=flat-square" alt="Crimson"></td>
+      <td><code>#FF3B5C</code></td>
+      <td>Насыщенный малиново-красный</td>
+    </tr>
+    <tr>
+      <td><strong>CreamGold</strong></td>
+      <td align="center"><img src="https://img.shields.io/badge/-FFD166-FFD166?style=flat-square" alt="CreamGold"></td>
+      <td><code>#FFD166</code></td>
+      <td>Мягкий кремово-золотой</td>
+    </tr>
+  </tbody>
+</table>
 
-* **Свой фон:** поместите любые `.png` или `.jpg` изображения в `creamclient/backgrounds/` и выберите режим `CustomImage` в меню или ClickGUI.
-* **Своя музыка:** поместите треки в формате **`.wav` (PCM 16-bit, 44100 Hz)** в `creamclient/music/` и включите плеер кнопкой в правом верхнем углу меню.
-* **Установка своего шрифта (например, `Terentiev SP Regular`):** перед сборкой замените файл `src/main/resources/assets/creamclient/font/client_font.ttf` на нужный `.ttf` файл.
-* **Свой Discord Application ID:** при желании укажите `discordAppId` в файле `.minecraft/config/creamclient.json`.
+<hr>
 
-## Структура проекта
+<h2 id="modules">🧩 Модули и настройки</h2>
 
-```text
+<table>
+  <thead>
+    <tr>
+      <th align="left">Категория</th>
+      <th align="left">Модули</th>
+      <th align="left">Основные параметры</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>🎥 <strong>Visuals</strong></td>
+      <td><code>ParticleAura</code>, <code>HitParticles</code>, <code>TargetRing</code>, <code>BlockOverlay</code>, <code>ChinaHat</code>, <code>JumpCircles</code>, <code>Trails</code>, <code>BoxESP</code>, <code>CustomFog</code>, <code>TimeChanger</code>, <code>NoWeather</code>, <code>ViewModel</code>, <code>Fullbright</code>, <code>NoHurtCam</code>, <code>Zoom</code></td>
+      <td>Радиус и скорость колец, число частиц ауры и искр, длительность шлейфа, цвет тумана RGB, смещение и масштаб руки, время суток, зум на <kbd>C</kbd></td>
+    </tr>
+    <tr>
+      <td>📊 <strong>HUD</strong></td>
+      <td><code>Watermark</code>, <code>TargetHUD</code>, <code>SessionInfo</code>, <code>ScreenGlow</code>, <code>CustomHotbar</code>, <code>Coordinates</code>, <code>Keystrokes</code>, <code>ModuleList</code>, <code>ArmorHUD</code>, <code>PotionHUD</code>, <code>Speedometer</code>, <code>Crosshair</code></td>
+      <td>Логотип, FPS, Ping, биом, счётчик CPS (<code>LMB</code>/<code>RMB</code>), интенсивность свечения по краям, размер прицела</td>
+    </tr>
+    <tr>
+      <td>🏃 <strong>Movement</strong></td>
+      <td><code>ToggleSprint</code>, <code>AutoRespawn</code></td>
+      <td>Автоматический спринт при движении вперёд и мгновенный респаун</td>
+    </tr>
+    <tr>
+      <td>🎛️ <strong>Interface</strong></td>
+      <td><code>Appearance</code>, <code>CustomMenus</code>, <code>BlackCursor</code>, <code>DiscordRPC</code></td>
+      <td>Палитра, <code>ColorMode</code>, шрифт, язык, прозрачность панелей, скорость анимаций, показ сервера и ника в Discord</td>
+    </tr>
+    <tr>
+      <td>🎵 <strong>Media</strong></td>
+      <td><code>Background</code>, <code>MenuMusic</code></td>
+      <td>Выбор фона (<code>DefaultImage</code> / <code>Animated</code> / <code>CustomImage</code>), затемнение фона, громкость музыки</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2 id="hotkeys">⌨️ Горячие клавиши и управление</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">Клавиша / Действие</th>
+      <th align="left">Назначение</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><kbd>Right Shift</kbd></td>
+      <td>Открыть или закрыть ClickGUI</td>
+    </tr>
+    <tr>
+      <td><kbd>C</kbd></td>
+      <td>Плавный оптический зум камеры (<code>Zoom</code>)</td>
+    </tr>
+    <tr>
+      <td><kbd>ЛКМ</kbd> в ClickGUI</td>
+      <td>Включить/выключить модуль, переключить режим или двигать слайдер</td>
+    </tr>
+    <tr>
+      <td><kbd>ПКМ</kbd> в ClickGUI</td>
+      <td>Раскрыть или свернуть дополнительные настройки модуля</td>
+    </tr>
+    <tr>
+      <td><kbd>Колёсико мыши</kbd></td>
+      <td>Вертикальная прокрутка колонок ClickGUI</td>
+    </tr>
+    <tr>
+      <td><kbd>ESC</kbd></td>
+      <td>Сохранить конфиг в <code>.minecraft/config/creamclient.json</code> и закрыть меню</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2 id="custom">🖼️ Кастомный фон, музыка и свой шрифт</h2>
+
+<p>После первого запуска клиент создаёт рабочие папки в директории игры (<code>%appdata%\.minecraft\creamclient\</code>):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">Что</th>
+      <th align="left">Как</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>🖼️ <strong>Свой фон</strong></td>
+      <td>Поместите любые <code>.png</code> или <code>.jpg</code> изображения в <code>creamclient/backgrounds/</code> и выберите режим <code>CustomImage</code> в меню или ClickGUI.</td>
+    </tr>
+    <tr>
+      <td>🎵 <strong>Своя музыка</strong></td>
+      <td>Поместите треки в формате <strong><code>.wav</code> (PCM 16-bit, 44100 Hz)</strong> в <code>creamclient/music/</code> и включите плеер кнопкой в правом верхнем углу меню.</td>
+    </tr>
+    <tr>
+      <td>🔤 <strong>Установка своего шрифта</strong></td>
+      <td>Перед сборкой замените файл <code>src/main/resources/assets/creamclient/font/client_font.ttf</code> на нужный <code>.ttf</code> файл (например, <code>Terentiev SP Regular</code>).</td>
+    </tr>
+    <tr>
+      <td>🤖 <strong>Свой Discord Application ID</strong></td>
+      <td>При желании укажите <code>discordAppId</code> в файле <code>.minecraft/config/creamclient.json</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2 id="structure">📁 Структура проекта</h2>
+
+<pre>
 CreamClient-Minecraft/
 ├── .github/workflows/build.yml
 ├── src/main/java/com/creamclient/
@@ -119,30 +303,49 @@ CreamClient-Minecraft/
     └── assets/creamclient/
         ├── font/
         └── textures/
-```
+</pre>
 
-## Сборка и установка
+<hr>
 
-### Автоматическая сборка через GitHub Actions
+<h2 id="build">⚙️ Сборка и установка</h2>
 
-1. Загрузите файлы проекта в репозиторий на GitHub вместе с `.github/workflows/build.yml`.
-2. Откройте вкладку **Actions**, выберите **Build CreamClient 1.0** и нажмите **Run workflow**.
-3. Скачайте готовый `.jar` файл из раздела **Artifacts**.
+<h3>🤖 Автоматическая сборка через GitHub Actions</h3>
 
-### Локальная сборка
+<ol>
+  <li>Загрузите файлы проекта в репозиторий на GitHub вместе с <code>.github/workflows/build.yml</code>.</li>
+  <li>Откройте вкладку <strong>Actions</strong>, выберите <strong>Build CreamClient 1.0</strong> и нажмите <strong>Run workflow</strong>.</li>
+  <li>Скачайте готовый <code>.jar</code> файл из раздела <strong>Artifacts</strong>.</li>
+</ol>
 
-Требуется установленный **JDK 8** и **Gradle**:
+<h3>🛠️ Локальная сборка</h3>
 
-```bash
-gradle build --no-daemon
-```
+<p>Требуется установленный <strong>JDK 8</strong> и <strong>Gradle</strong>:</p>
 
-Готовый мод появится в папке `build/libs/CreamClient-1.16.5-1.0.jar`.
+<pre><code>gradle build --no-daemon
+</code></pre>
 
-### Установка в игру
+<p>Готовый мод появится в папке <code>build/libs/CreamClient-1.16.5-1.0.jar</code>.</p>
 
-1. Установите **Minecraft Forge 1.16.5** (`36.2.42`).
-2. Скопируйте `.jar` файл в папку `%appdata%\.minecraft\mods`.
-3. Запустите профиль **Forge 1.16.5**.
+<h3>📥 Установка в игру</h3>
 
-Разработка: [sharagin](https://github.com/sharagin/CreamClient-Minecraft)
+<ol>
+  <li>Установите <strong>Minecraft Forge 1.16.5</strong> (<code>36.2.42</code>).</li>
+  <li>Скопируйте <code>.jar</code> файл в папку <code>%appdata%\.minecraft\mods</code>.</li>
+  <li>Запустите профиль <strong>Forge 1.16.5</strong>.</li>
+</ol>
+
+<hr>
+
+<div align="center">
+
+<p>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft"><img src="https://img.shields.io/badge/-GitHub-1a1a1a?style=flat-square&logo=github&logoColor=A3FF12" alt="GitHub"></a>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft/releases"><img src="https://img.shields.io/badge/-Releases-A3FF12?style=flat-square&logo=github&logoColor=1a1a1a" alt="Releases"></a>
+  <a href="https://github.com/sharagin/CreamClient-Minecraft/issues"><img src="https://img.shields.io/badge/-Issues-1a1a1a?style=flat-square&logo=githubactions&logoColor=A3FF12" alt="Issues"></a>
+</p>
+
+<p><strong>Разработка:</strong> <a href="https://github.com/sharagin/CreamClient-Minecraft">sharagin</a></p>
+
+<p>♡ <em>c r e a m &nbsp; c l i e n t</em> ♡</p>
+
+</div>
