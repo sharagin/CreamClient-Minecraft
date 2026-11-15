@@ -4,12 +4,12 @@
 
 **Кастомный клиент-мод для Minecraft Forge 1.16.5 с лаймовой эстетикой, 3D-визуалами, переработанными меню и гибкой кастомизацией**
 
-
-
-
-[Build Status](https://www.google.com/search?q=https://github.com/sharagin/CreamClient-Minecraft/actions)
-[GitHub Stars](https://www.google.com/search?q=https://github.com/sharagin/CreamClient-Minecraft/stargazers)
-[Last Commit](https://www.google.com/search?q=https://github.com/sharagin/CreamClient-Minecraft/commits)
+[https://img.shields.io/badge/MC-1.16.5-a3ff12?style=flat-square&logo=minecraft&logoColor=0a0d0a&labelColor=141b14]
+[https://img.shields.io/badge/Forge-36.2.42-a3ff12?style=flat-square&labelColor=141b14]
+[https://img.shields.io/badge/v1.0-a3ff12?style=flat-square&labelColor=141b14]
+[[https://img.shields.io/github/actions/workflow/status/sharagin/CreamClient-Minecraft/build.yml?style=flat-square&label=Build&color=a3ff12&labelColor=141b14]](https://github.com/sharagin/CreamClient-Minecraft/actions)
+[[https://img.shields.io/github/stars/sharagin/CreamClient-Minecraft?style=flat-square&color=a3ff12&labelColor=141b14]](https://github.com/sharagin/CreamClient-Minecraft/stargazers)
+[[https://skillicons.dev/icons?i=java,gradle,github,githubactions,discord&theme=dark]](https://github.com/sharagin/CreamClient-Minecraft)
 
 ## Технологический стек
 
