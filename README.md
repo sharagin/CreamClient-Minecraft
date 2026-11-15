@@ -1,7 +1,3 @@
-&lt;div align=&quot;center&quot;&gt;
-
-&lt;img src=&quot;src/main/resources/assets/creamclient/textures/logo.png&quot; alt=&quot;CreamClient Logo&quot; width=&quot;120&quot; /&gt;
-
 # CreamClient
 
 **Кастомный клиент-мод для Minecraft Forge 1.16.5 с лаймовой эстетикой, 3D-визуалами, переработанными меню и гибкой кастомизацией**
