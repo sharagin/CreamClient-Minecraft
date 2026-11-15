@@ -3,6 +3,8 @@ package com.creamclient.ui;
 import com.creamclient.CreamClientMod;
 import com.creamclient.theme.CreamTheme;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.MultiplayerScreen;
 import net.minecraft.client.gui.screen.OptionsScreen;
 import net.minecraft.client.gui.screen.Screen;
@@ -18,13 +20,10 @@ public class CreamMainMenuScreen extends Screen {
     private static final String[] ASCII_BANNER = {
         "  ______   _______   ________   ______   __       __ ",
         " /      \\ /       \\ /        | /      \\ /  \\     /  |",
-        "/$$$$$$  |$$$$$$$  |$$$$$$$$/ /$$$$$$  |$$  \\   /$$ |",
-        "$$ |  $$/ $$ |__$$ |$$ |__    $$ |__$$ |$$$  \\ /$$$ |",
-        "$$ |      $$    $$< $$    |   $$    $$ |$$$$  /$$$$ |",
-        "$$ |   __ $$$$$$$  |$$$$$/    $$$$$$$$ |$$ $$ $$/$$ |",
-        "$$ \\__/  |$$ |  $$ |$$ |_____ $$ |  $$ |$$ |$$$/ $$ |",
-        "$$    $$/ $$ |  $$ |$$       |$$ |  $$ |$$ | $/  $$ |",
-        " $$$$$$/  $$/   $$/ $$$$$$$$/ $$/   $$/ $$/      $$/ "
+        "/$$$$$$\vert{}$$$$$$$\vert{}$$$$$$$$/ /$$$$$$  |$$\\   /$$ |",
+        "$$\vert{}$$/ $$\vert{}__$$ |$$\vert{}__$$ |__$$\vert{}$$$\\ /$$$ \vert{}", "$$ |      $$    $$< $$\vert{}$$    $$\vert{}$$$$/$$$$ |",
+        "$$\vert{}   __$$$$$$$\vert{}$$$$$/$$$$$$$$ |$$ $$ $$/$$ |",
+        "$$\\__/  \vert{}$$ |  $$\vert{}$$ |_____ $$\vert{}$$ |$$\vert{}$$$/ $$ \vert{}", "$$    $$/$$\vert{}$$\vert{}$$\vert{}$$\vert{}$$\vert{}$$\vert{}$/  $$ \vert{}", " $$$$$$/$$/   $$/$$$$$$$$/ $$/$$/ $$/$$/ "
     };
 
     private final List<MenuActionButton> menuButtons = new ArrayList<>();
@@ -57,10 +56,8 @@ public class CreamMainMenuScreen extends Screen {
 
     @Override
     public void render(MatrixStack ms, int mouseX, int mouseY, float partialTicks) {
-        // Dark background
         fill(ms, 0, 0, this.width, this.height, CreamTheme.BG_DARK);
 
-        // Subtle lime grid lines
         int gridStep = 32;
         for (int gx = 0; gx < this.width; gx += gridStep) {
             fill(ms, gx, 0, gx + 1, this.height, 0x0A3E6310);
@@ -69,10 +66,8 @@ public class CreamMainMenuScreen extends Screen {
             fill(ms, 0, gy, this.width, gy + 1, 0x0A3E6310);
         }
 
-        // Top accent line
         fill(ms, 0, 0, this.width, 2, CreamTheme.LIME_PRIMARY);
 
-        // ASCII Banner ("CREAM")
         int bannerStartY = Math.max(22, this.height / 2 - 128);
         float pulse = (float) (0.75 + 0.25 * Math.sin(System.currentTimeMillis() / 700.0));
         int alpha = 255;
@@ -85,16 +80,13 @@ public class CreamMainMenuScreen extends Screen {
             CreamTheme.drawMonoCentered(ms, ASCII_BANNER[i], this.width / 2.0f, bannerStartY + i * 9, bannerColor);
         }
 
-        // Thin subtitle under ASCII banner
         int subY = bannerStartY + ASCII_BANNER.length * 9 + 8;
         CreamTheme.drawThinCentered(ms, "c r e a m   c l i e n t   //   1 . 1 6 . 5", this.width / 2.0f, subY, CreamTheme.TEXT_MUTED);
 
-        // Render sleek buttons
         for (MenuActionButton btn : menuButtons) {
             btn.render(ms, mouseX, mouseY);
         }
 
-        // Bottom footer
         int footerY = this.height - 16;
         CreamTheme.drawThin(ms, CreamClientMod.CLIENT_NAME + " v" + CreamClientMod.CLIENT_VERSION + "  |  Forge 1.16.5", 12, footerY, CreamTheme.TEXT_MUTED);
         String rightHint = "[RSHIFT] ClickGUI in-game";
@@ -147,7 +139,7 @@ public class CreamMainMenuScreen extends Screen {
 
             CreamTheme.drawBorderedRect(ms, x, y, x + w, y + h, fill, border);
             if (hovered) {
-                fill(ms, x + 1, y + 1, x + 3, y + h - 1, CreamTheme.LIME_PRIMARY);
+                AbstractGui.fill(ms, x + 1, y + 1, x + 3, y + h - 1, CreamTheme.LIME_PRIMARY);
             }
             CreamTheme.drawThinCentered(ms, label, x + w / 2.0f, y + (h - 9) / 2.0f, textColor);
         }
