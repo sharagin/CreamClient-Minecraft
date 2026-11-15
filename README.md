@@ -7,37 +7,76 @@
 
 
 
-
-
 [Build Status](https://www.google.com/search?q=https://github.com/sharagin/CreamClient-Minecraft/actions)
 [GitHub Stars](https://www.google.com/search?q=https://github.com/sharagin/CreamClient-Minecraft/stargazers)
 [Last Commit](https://www.google.com/search?q=https://github.com/sharagin/CreamClient-Minecraft/commits)
+
+## Технологический стек
+
+
+
+
+
+
+
 
 
 
 [Репозиторий](https://github.com/sharagin/CreamClient-Minecraft) | [Сборка в Actions](https://www.google.com/search?q=https://github.com/sharagin/CreamClient-Minecraft/actions) | [Скачать релиз](https://www.google.com/search?q=https://github.com/sharagin/CreamClient-Minecraft/releases)
 
-## Возможности клиента
+```text
+  ✧  ╭───────────────────────────────────────╮  ✧
+     │   ▄████▄  ██▀███  ▓█████ ▄▄▄   ██▄ ██ │   
+  ⋆  │  ▒██▀ ▀█ ▓██ ▒ ██▒▓█   ▀▒████▄ ▓██▒██ │  ⋆
+     │  ▒▓█   ▄ ▓██ ░▄█ ▒▒███  ▒██ ▀█▄▓██░██ │   
+  ✧  │  ▒▓▓▄██▒ ▒██▀▀█▄  ▒▓█  ▄░██▄▄██▒██ ██ │  ✧
+     ╰───────  ♡  c r e a m  c l i e n t  ♡  ─╯   
+```
 
-* **Полностью переработанный интерфейс:** кастомное главное меню с созвездиями и ASCII-баннером, меню паузы, мультиплеер, настройки, стилизация инвентаря и чёрный игровой курсор.
-* **Мультиязычность (`RU` / `EN` / `UK`):** мгновенное переключение языка интерфейса прямо в меню, настройках или ClickGUI.
-* **Гибкая типографика:** чёткий HD-шрифт `CreamHD` (с возможностью замены на любой `.ttf`, включая `Terentiev SP Regular`) и быстрый возврат на `Vanilla` шрифт.
-* **Динамические цветовые режимы:** 7 встроенных палитр (`Lime`, `Citrus`, `Mint`, `CyberCyan`, `Amethyst`, `Crimson`, `CreamGold`) и режимы анимации цвета (`Breathing`, `Rainbow`, `Static`).
-* **Discord Rich Presence:** встроенная интеграция с Discord Desktop через Windows Named Pipe без сторонних DLL.
-* **Медиа-система:** загрузка собственных картинок на фон (`.png` / `.jpg`) и фоновый плеер музыки (`.wav`).
+## Ключевые особенности и архитектура
+
+* **Чистый Forge без Mixin-конфликтов:** вся графика, хуки экранов и 3D-рендеринг построены на стандартной шине событий `MinecraftForge.EVENT_BUS`, благодаря чему мод стабильно работает с другими Forge-модами и ресурспаками.
+* **Плавная физика интерфейса:** переходы меню, раскрытие ClickGUI, переключение модулей и перемещение рамки хотбара используют сглаживание `easeOutCubic` и `lerp` с настраиваемой скоростью.
+* **Чёткая типографика с выбором:** шрифт `CreamHD` растеризуется в повышенном разрешении (`size 15.0`, `oversample 8.0`) и масштабируется через `MatrixStack`, что убирает размытие; в любой момент можно переключиться на классический `Vanilla` шрифт.
+* **Кастомные экраны целиком:** переработаны `CreamMainMenuScreen` (созвездия, логотип, кнопка GitHub), `CreamMultiplayerScreen` (список серверов и прямой вход по IP), `CreamOptionsScreen`, `CreamPauseScreen`, а также тёмно-лаймовое оформление инвентаря и контейнеров.
+* **Нативный Discord Rich Presence без DLL:** клиент напрямую общается с Discord Desktop через Windows Named Pipe (`\\.\pipe\discord-ipc-*`), безопасно обновляя статус игрока в главном потоке.
+* **Чёрный игровой курсор:** при открытии любого меню системный указатель скрывается через `GLFW`, а поверх интерфейса рисуется кастомный PNG-курсор с акцентной обводкой.
+* **Мультиязычность (`RU` / `EN` / `UK`):** переключение языка переводит меню, настройки и подсказки на лету без перезапуска игры.
+
+## Цветовые палитры и режимы
+
+В разделе **ClickGUI → Interface → Appearance** доступны 7 палитр и 3 динамических режима (`Breathing`, `Rainbow`, `Static`), которые меняют цвет интерфейса, курсора, хотбара и 3D-эффектов одновременно:
+
+| Палитра | Основной HEX | Характер |
+| :--- | :--- | :--- |
+| **Lime** | `#A3FF12` | Фирменный неоново-лаймовый |
+| **Citrus** | `#FF9F1C` | Тёплый цитрусово-апельсиновый |
+| **Mint** | `#2EFFB2` | Холодный мятный |
+| **CyberCyan** | `#00E5FF` | Яркий кибер-голубой |
+| **Amethyst** | `#C06CFF` | Неоновый фиолетовый |
+| **Crimson** | `#FF3B5C` | Насыщенный малиново-красный |
+| **CreamGold** | `#FFD166` | Мягкий кремово-золотой |
 
 ## Модули и настройки
 
-> Нажмите **`Right Shift`** в игре, чтобы открыть ClickGUI.
-> **ЛКМ** включает модуль или меняет значение, **ПКМ** раскрывает тонкие настройки.
-
 | Категория | Модули | Основные параметры |
-| ----- | ----- | ----- |
-| **Visuals** | `ParticleAura`, `HitParticles`, `TargetRing`, `BlockOverlay`, `ChinaHat`, `JumpCircles`, `Trails`, `BoxESP`, `CustomFog`, `TimeChanger`, `NoWeather`, `ViewModel`, `Fullbright`, `NoHurtCam`, `Zoom` | Радиус и скорость колец, число частиц, длительность шлейфа, цвет тумана RGB, смещение и масштаб руки, время суток, зум на `C` |
-| **HUD** | `Watermark`, `TargetHUD`, `SessionInfo`, `ScreenGlow`, `CustomHotbar`, `Coordinates`, `Keystrokes`, `ModuleList`, `ArmorHUD`, `PotionHUD`, `Speedometer`, `Crosshair` | Логотип, FPS, Ping, биом, счётчик CPS (`LMB`/`RMB`), интенсивность свечения краёв, размер прицела |
-| **Movement** | `ToggleSprint`, `AutoRespawn` | Автоматический спринт и мгновенный респаун |
+| :--- | :--- | :--- |
+| **Visuals** | `ParticleAura`, `HitParticles`, `TargetRing`, `BlockOverlay`, `ChinaHat`, `JumpCircles`, `Trails`, `BoxESP`, `CustomFog`, `TimeChanger`, `NoWeather`, `ViewModel`, `Fullbright`, `NoHurtCam`, `Zoom` | Радиус и скорость колец, число частиц ауры и искр, длительность шлейфа, цвет тумана RGB, смещение и масштаб руки, время суток, зум на `C` |
+| **HUD** | `Watermark`, `TargetHUD`, `SessionInfo`, `ScreenGlow`, `CustomHotbar`, `Coordinates`, `Keystrokes`, `ModuleList`, `ArmorHUD`, `PotionHUD`, `Speedometer`, `Crosshair` | Логотип, FPS, Ping, биом, счётчик CPS (`LMB`/`RMB`), интенсивность свечения по краям, размер прицела |
+| **Movement** | `ToggleSprint`, `AutoRespawn` | Автоматический спринт при движении вперёд и мгновенный респаун |
 | **Interface** | `Appearance`, `CustomMenus`, `BlackCursor`, `DiscordRPC` | Палитра, `ColorMode`, шрифт, язык, прозрачность панелей, скорость анимаций, показ сервера и ника в Discord |
 | **Media** | `Background`, `MenuMusic` | Выбор фона (`DefaultImage` / `Animated` / `CustomImage`), затемнение фона, громкость музыки |
+
+## Горячие клавиши и управление
+
+| Клавиша / Действие | Назначение |
+| :--- | :--- |
+| **`Right Shift`** | Открыть или закрыть ClickGUI |
+| **`C`** | Плавный оптический зум камеры (`Zoom`) |
+| **`ЛКМ`** в ClickGUI | Включить/выключить модуль, переключить режим или двигать слайдер |
+| **`ПКМ`** в ClickGUI | Раскрыть или свернуть дополнительные настройки модуля |
+| **`Колёсико мыши`** | Вертикальная прокрутка колонок ClickGUI |
+| **`ESC`** | Сохранить конфиг в `.minecraft/config/creamclient.json` и закрыть меню |
 
 ## Кастомный фон, музыка и свой шрифт
 
@@ -47,6 +86,40 @@
 * **Своя музыка:** поместите треки в формате **`.wav` (PCM 16-bit, 44100 Hz)** в `creamclient/music/` и включите плеер кнопкой в правом верхнем углу меню.
 * **Установка своего шрифта (например, `Terentiev SP Regular`):** перед сборкой замените файл `src/main/resources/assets/creamclient/font/client_font.ttf` на нужный `.ttf` файл.
 * **Свой Discord Application ID:** при желании укажите `discordAppId` в файле `.minecraft/config/creamclient.json`.
+
+## Структура проекта
+
+```text
+CreamClient-Minecraft/
+├── .github/workflows/build.yml
+├── src/main/java/com/creamclient/
+│   ├── CreamClientMod.java
+│   ├── config/CreamConfig.java
+│   ├── discord/DiscordRPC.java
+│   ├── event/ClientEvents.java
+│   ├── media/MediaManager.java
+│   ├── module/
+│   │   ├── Category.java
+│   │   ├── Module.java
+│   │   ├── ModuleManager.java
+│   │   └── Setting.java
+│   ├── theme/
+│   │   ├── CreamTheme.java
+│   │   └── Lang.java
+│   ├── ui/
+│   │   ├── ClickGuiScreen.java
+│   │   ├── CreamMainMenuScreen.java
+│   │   ├── CreamMultiplayerScreen.java
+│   │   ├── CreamOptionsScreen.java
+│   │   ├── CreamPauseScreen.java
+│   │   └── HudOverlay.java
+│   └── visual/WorldVisuals.java
+└── src/main/resources/
+    ├── META-INF/mods.toml
+    └── assets/creamclient/
+        ├── font/
+        └── textures/
+```
 
 ## Сборка и установка
 
