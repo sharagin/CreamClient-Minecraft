@@ -17,13 +17,14 @@ import java.util.List;
 
 public class CreamMainMenuScreen extends Screen {
 
-    private static final String[] ASCII_BANNER = {
-        "  ______   _______   ________   ______   __       __ ",
-        " /      \\ /       \\ /        | /      \\ /  \\     /  |",
-        "/$$$$$$\vert{}$$$$$$$\vert{}$$$$$$$$/ /$$$$$$  |$$\\   /$$ |",
-        "$$\vert{}$$/ $$\vert{}__$$ |$$\vert{}__$$ |__$$\vert{}$$$\\ /$$$ \vert{}", "$$ |      $$    $$< $$\vert{}$$    $$\vert{}$$$$/$$$$ |",
-        "$$\vert{}   __$$$$$$$\vert{}$$$$$/$$$$$$$$ |$$ $$ $$/$$ |",
-        "$$\\__/  \vert{}$$ |  $$\vert{}$$ |_____ $$\vert{}$$ |$$\vert{}$$$/ $$ \vert{}", "$$    $$/$$\vert{}$$\vert{}$$\vert{}$$\vert{}$$\vert{}$$\vert{}$/  $$ \vert{}", " $$$$$$/$$/   $$/$$$$$$$$/ $$/$$/ $$/$$/ "
+private static final String[] ASCII_BANNER = {
+        "  ######  #######  ########  ######  ##     ## ",
+        " ##    ## ##    ## ##       ##    ## ###   ### ",
+        " ##       ##    ## ##       ##    ## #### #### ",
+        " ##       #######  ######   ######## ## ### ## ",
+        " ##       ##   ##  ##       ##    ## ##     ## ",
+        " ##    ## ##    ## ##       ##    ## ##     ## ",
+        "  ######  ##    ## ######## ##    ## ##     ## "
     };
 
     private final List<MenuActionButton> menuButtons = new ArrayList<>();
