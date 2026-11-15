@@ -14,17 +14,28 @@ import java.util.Comparator;
 import java.util.List;
 
 public final class HudOverlay {
+    private static int currentFps = 0;
+    private static int frameCount = 0;
+    private static long lastFpsTime = System.currentTimeMillis();
+
     private HudOverlay() {}
 
     public static void render(MatrixStack ms, int screenWidth, int screenHeight) {
+        frameCount++;
+        long now = System.currentTimeMillis();
+        if (now - lastFpsTime >= 1000L) {
+            currentFps = frameCount;
+            frameCount = 0;
+            lastFpsTime = now;
+        }
+
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.options.renderDebug || !ModuleManager.HUD.isEnabled()) {
             return;
         }
 
-        // 1. Watermark
         if (ModuleManager.WATERMARK.isEnabled()) {
-            int fps = Minecraft.getInstance().fps;
+            int fps = currentFps;
             String text = CreamClientMod.CLIENT_NAME + "  |  1.16.5  |  " + fps + " FPS";
             int w = CreamTheme.widthThin(text) + 14;
             CreamTheme.drawBorderedRect(ms, 8, 8, 8 + w, 24, CreamTheme.BG_PANEL, CreamTheme.BORDER);
@@ -32,7 +43,6 @@ public final class HudOverlay {
             CreamTheme.drawThin(ms, text, 15, 11.5f, CreamTheme.TEXT_PRIMARY);
         }
 
-        // 2. Coordinates
         if (ModuleManager.COORDS.isEnabled()) {
             int x = (int) Math.floor(mc.player.getX());
             int y = (int) Math.floor(mc.player.getY());
@@ -44,7 +54,6 @@ public final class HudOverlay {
             CreamTheme.drawThin(ms, coords, 14, cy + 3.5f, CreamTheme.LIME_SOFT);
         }
 
-        // 3. Keystrokes (bottom-right)
         if (ModuleManager.KEYSTROKES.isEnabled()) {
             int baseX = screenWidth - 76;
             int baseY = screenHeight - 68;
@@ -55,7 +64,6 @@ public final class HudOverlay {
             drawKey(ms, "SPACE", baseX, baseY + 40, 64, 16, mc.options.keyJump);
         }
 
-        // 4. Active Modules ArrayList (top-right)
         if (ModuleManager.ARRAYLIST.isEnabled()) {
             List<Module> active = new ArrayList<>();
             for (Module m : ModuleManager.getModules()) {
