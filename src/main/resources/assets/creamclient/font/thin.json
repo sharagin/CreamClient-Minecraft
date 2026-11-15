@@ -1,0 +1,11 @@
+{
+  "providers": [
+    {
+      "type": "ttf",
+      "file": "creamclient:noto_regular.ttf",
+      "shift": [0.0, 0.5],
+      "size": 15.0,
+      "oversample": 8.0
+    }
+  ]
+}

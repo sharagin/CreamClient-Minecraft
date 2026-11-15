@@ -1,0 +1,158 @@
+package com.creamclient.event;
+
+import com.creamclient.CreamClientMod;
+import com.creamclient.module.ModuleManager;
+import com.creamclient.theme.CreamTheme;
+import com.creamclient.ui.ClickGuiScreen;
+import com.creamclient.ui.CreamMainMenuScreen;
+import com.creamclient.ui.CreamPauseScreen;
+import com.creamclient.ui.HudOverlay;
+import com.creamclient.visual.WorldVisuals;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.screen.IngameMenuScreen;
+import net.minecraft.client.gui.screen.MainMenuScreen;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+public class ClientEvents {
+    private float currentFov = 70.0f;
+
+    @SubscribeEvent
+    public void onGuiOpen(GuiOpenEvent event) {
+        if (!ModuleManager.CUSTOM_MENUS.isEnabled()) return;
+
+        if (event.getGui() instanceof MainMenuScreen) {
+            event.setGui(new CreamMainMenuScreen());
+        } else if (event.getGui() instanceof IngameMenuScreen) {
+            event.setGui(new CreamPauseScreen());
+        }
+    }
+
+    @SubscribeEvent
+    public void onGuiBackground(GuiScreenEvent.BackgroundDrawnEvent event) {
+        if (!ModuleManager.CUSTOM_MENUS.isEnabled()) return;
+        if (event.getGui() instanceof CreamMainMenuScreen
+                || event.getGui() instanceof CreamPauseScreen
+                || event.getGui() instanceof ClickGuiScreen) {
+            return;
+        }
+        MatrixStack ms = event.getMatrixStack();
+        int w = event.getGui().width;
+        AbstractGui.fill(ms, 0, 0, w, 2, CreamTheme.getAccent());
+    }
+
+    @SubscribeEvent
+    public void onClientTick(TickEvent.ClientTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) return;
+
+        Minecraft mc = Minecraft.getInstance();
+        if (CreamClientMod.clickGuiKey != null && CreamClientMod.clickGuiKey.consumeClick()) {
+            if (mc.screen == null && mc.player != null) {
+                mc.setScreen(new ClickGuiScreen());
+            } else if (mc.screen instanceof ClickGuiScreen) {
+                mc.setScreen(null);
+            }
+        }
+
+        if (mc.player != null && ModuleManager.TOGGLE_SPRINT.isEnabled()) {
+            if (mc.player.input != null && mc.player.input.forwardImpulse > 0
+                    && !mc.player.isShiftKeyDown() && !mc.player.horizontalCollision) {
+                mc.player.setSprinting(true);
+            }
+        }
+
+        if (mc.level != null && ModuleManager.TIME_CHANGER.isEnabled()) {
+            long time = 18000L;
+            switch (ModuleManager.TIME_MODE.getMode()) {
+                case "Day": time = 6000L; break;
+                case "Sunset": time = 12500L; break;
+                case "Midnight": time = 18000L; break;
+                default: time = 14000L; break;
+            }
+            mc.level.setDayTime(time);
+        }
+
+        WorldVisuals.onClientTick();
+    }
+
+    @SubscribeEvent
+    public void onRenderOverlayPre(RenderGameOverlayEvent.Pre event) {
+        if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR
+                && ModuleManager.HUD.isEnabled()
+                && ModuleManager.CUSTOM_HOTBAR.isEnabled()) {
+            event.setCanceled(true);
+            HudOverlay.renderCustomHotbar(
+                    event.getMatrixStack(),
+                    event.getWindow().getGuiScaledWidth(),
+                    event.getWindow().getGuiScaledHeight()
+            );
+        } else if (event.getType() == RenderGameOverlayEvent.ElementType.CROSSHAIRS
+                && ModuleManager.HUD.isEnabled()
+                && ModuleManager.CROSSHAIR.isEnabled()) {
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void onRenderOverlayPost(RenderGameOverlayEvent.Post event) {
+        if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
+            HudOverlay.render(
+                    event.getMatrixStack(),
+                    event.getWindow().getGuiScaledWidth(),
+                    event.getWindow().getGuiScaledHeight()
+            );
+        }
+    }
+
+    @SubscribeEvent
+    public void onRenderWorldLast(RenderWorldLastEvent event) {
+        WorldVisuals.render(event.getMatrixStack(), event.getPartialTicks());
+    }
+
+    @SubscribeEvent
+    public void onFogColors(EntityViewRenderEvent.FogColors event) {
+        if (ModuleManager.CUSTOM_FOG.isEnabled()) {
+            event.setRed(ModuleManager.FOG_R.getFloat());
+            event.setGreen(ModuleManager.FOG_G.getFloat());
+            event.setBlue(ModuleManager.FOG_B.getFloat());
+        }
+    }
+
+    @SubscribeEvent
+    public void onFov(EntityViewRenderEvent.FOVModifier event) {
+        if (ModuleManager.ZOOM.isEnabled() && CreamClientMod.zoomKey != null && CreamClientMod.zoomKey.isDown()) {
+            currentFov = CreamTheme.lerp(currentFov, ModuleManager.ZOOM_FOV.getFloat(), 0.25f);
+            event.setFOV(currentFov);
+        } else {
+            currentFov = (float) event.getFOV();
+        }
+    }
+
+    @SubscribeEvent
+    public void onCameraSetup(EntityViewRenderEvent.CameraSetup event) {
+        if (ModuleManager.NO_HURT_CAM.isEnabled()) {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.player != null) {
+                mc.player.hurtTime = 0;
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onRenderHand(RenderHandEvent event) {
+        if (ModuleManager.VIEW_MODEL.isEnabled()) {
+            MatrixStack ms = event.getMatrixStack();
+            ms.translate(ModuleManager.HAND_X.getValue(), ModuleManager.HAND_Y.getValue(), ModuleManager.HAND_Z.getValue());
+            float s = ModuleManager.HAND_SCALE.getFloat();
+            ms.scale(s, s, s);
+        }
+    }
+}
