@@ -4,6 +4,7 @@ import com.creamclient.CreamClientMod;
 import com.creamclient.discord.DiscordRPC;
 import com.creamclient.module.ModuleManager;
 import com.creamclient.theme.CreamTheme;
+import com.creamclient.ui.NotificationManager;
 import com.creamclient.ui.ClickGuiScreen;
 import com.creamclient.ui.CreamChatManager;
 import com.creamclient.ui.CreamChatScreen;
@@ -57,6 +58,8 @@ public class ClientEvents {
     private float currentFov = 70.0f;
     private int tickCounter = 0;
     private int afkCounter = 0;
+    private boolean mKeyDown = false;
+    private final Map<String, Long> NEARBY_COOLDOWN = new HashMap<>();
 
     @SubscribeEvent
     public void onRenderTick(TickEvent.RenderTickEvent event) {
@@ -168,7 +171,8 @@ public class ClientEvents {
             else if (mc.screen instanceof ClickGuiScreen) mc.setScreen(null);
         }
         if (mc.player != null) {
-            // Waypoint quick key (M)
+            long win = mc.getWindow().getWindow();
+        // Waypoint quick key (M)
         if (mc.screen == null && GLFW.glfwGetKey(win, GLFW.GLFW_KEY_M) == GLFW.GLFW_PRESS) {
             if (!mKeyDown) {
                 mKeyDown = true;
