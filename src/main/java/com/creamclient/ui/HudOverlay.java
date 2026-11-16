@@ -439,7 +439,8 @@ public final class HudOverlay {
         Vector3d cPos = cam.getPosition();
         Vector3f look = cam.getLookVector();
         Vector3f up = cam.getUpVector();
-        Vector3f left = cam.getLeftVector();
+        Vector3f left = new Vector3f(up.x(), up.y(), up.z());
+        left.cross(look);
         double fovRad = Math.toRadians(mc.options.fov);
         double f = (sh / 2.0) / Math.tan(fovRad / 2.0);
         long now = System.currentTimeMillis();
