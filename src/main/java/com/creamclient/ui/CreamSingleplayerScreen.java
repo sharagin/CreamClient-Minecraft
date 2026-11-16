@@ -6,7 +6,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.screen.CreateWorldScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.storage.LevelSummary;
+import net.minecraft.world.storage.WorldSummary;
 import net.minecraft.world.storage.SaveFormat;
 
 import java.text.SimpleDateFormat;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class CreamSingleplayerScreen extends Screen {
     private final Screen parent;
-    private List<LevelSummary> worlds = new ArrayList<>();
+    private List<WorldSummary> worlds = new ArrayList<>();
     private int selectedIndex = -1;
     private float openProgress = 0.0f;
     private final List<SpBtn> buttons = new ArrayList<>();
@@ -81,7 +81,7 @@ public class CreamSingleplayerScreen extends Screen {
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
             for (int i = 0; i < worlds.size(); i++) {
                 if (rowY + 30 > listY + listH) break;
-                LevelSummary ls = worlds.get(i);
+                WorldSummary ls = worlds.get(i);
                 boolean sel = (i == selectedIndex);
                 boolean hov = mouseX >= listX + 6 && mouseX <= listX + listW - 6 && mouseY >= rowY && mouseY <= rowY + 28;
                 CreamTheme.drawBorderedRect(ms, listX + 6, rowY, listX + listW - 6, rowY + 28,
