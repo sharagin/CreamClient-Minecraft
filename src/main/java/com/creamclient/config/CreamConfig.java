@@ -102,7 +102,6 @@ public final class CreamConfig {
             for (Module m : ModuleManager.getModules()) {
                 JsonObject modObj = new JsonObject();
                 modObj.addProperty("enabled", m.isEnabled());
-                modObj.addProperty("key", m.getKey());
                 JsonObject settingsObj = new JsonObject();
                 for (Setting s : m.getSettings()) {
                     if (s instanceof Setting.BoolSetting) settingsObj.addProperty(s.getName(), ((Setting.BoolSetting) s).isEnabled());
@@ -134,7 +133,6 @@ public final class CreamConfig {
                 if (el == null || !el.isJsonObject()) continue;
                 JsonObject modObj = el.getAsJsonObject();
                 if (modObj.has("enabled")) m.setEnabled(modObj.get("enabled").getAsBoolean());
-                if (modObj.has("key")) m.setKey(modObj.get("key").getAsInt());
                 if (modObj.has("settings") && modObj.get("settings").isJsonObject()) {
                     JsonObject settingsObj = modObj.getAsJsonObject("settings");
                     for (Setting s : m.getSettings()) {
