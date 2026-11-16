@@ -14,7 +14,13 @@ public final class NotificationManager {
 
     public static void push(String title, boolean enabled) {
         if (ModuleManager.NOTIFICATIONS == null || !ModuleManager.NOTIFICATIONS.isEnabled()) return;
-        LIST.add(new Notif(title, enabled));
+        LIST.add(new Notif(title + (enabled ? "  [ON]" : "  [OFF]"), enabled ? -1 : 0xFFFF5555));
+        if (LIST.size() > 5) LIST.remove(0);
+    }
+
+    public static void push(String title, String message, int color) {
+        if (ModuleManager.NOTIFICATIONS == null || !ModuleManager.NOTIFICATIONS.isEnabled()) return;
+        LIST.add(new Notif(title + ": " + message, color));
         if (LIST.size() > 5) LIST.remove(0);
     }
 
@@ -33,17 +39,17 @@ public final class NotificationManager {
             long age = now - n.created;
             float anim = age < 300 ? CreamTheme.easeOutExpo(age / 300.0f) : (age > 2000 ? 1.0f - ((age - 2000) / 400.0f) : 1.0f);
             anim = Math.max(0.0f, Math.min(1.0f, anim));
-            String msg = n.title + (n.enabled ? "  [ON]" : "  [OFF]");
-            int w = CreamTheme.getTextWidth(msg) + 18;
+            int w = CreamTheme.getTextWidth(n.text) + 18;
             int x = (int) (screenWidth - (w + 10) * anim);
-            CreamTheme.drawBorderedRect(ms, x, y, x + w, y + 18, panelBg, n.enabled ? accent : 0xFFFF5555);
-            CreamTheme.drawText(ms, msg, x + 7, y + 5, CreamTheme.TEXT_PRIMARY);
+            int borderCol = n.color == -1 ? accent : n.color;
+            CreamTheme.drawBorderedRect(ms, x, y, x + w, y + 18, panelBg, borderCol);
+            CreamTheme.drawText(ms, n.text, x + 7, y + 5, CreamTheme.TEXT_PRIMARY);
             y -= 22;
         }
     }
 
     private static class Notif {
-        final String title; final boolean enabled; final long created = System.currentTimeMillis();
-        Notif(String title, boolean enabled) { this.title = title; this.enabled = enabled; }
+        final String text; final int color; final long created = System.currentTimeMillis();
+        Notif(String text, int color) { this.text = text; this.color = color; }
     }
 }
