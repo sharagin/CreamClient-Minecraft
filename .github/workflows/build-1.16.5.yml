@@ -1,12 +1,14 @@
-name: Build CreamClient 1.16.5
+name: Build CreamClient 1.0 (Forge 1.16.5)
 
 on:
   push:
     branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
   workflow_dispatch:
 
 jobs:
-  build:
+  build-1-16-5:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,16 +21,16 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+      - name: Setup Gradle 7.4.2
+        uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '7.4.2'
 
-      - name: Build Mod JAR
+      - name: Build Forge 1.16.5 JAR
         run: gradle build --no-daemon --stacktrace
 
-      - name: Upload CreamClient JAR
+      - name: Upload CreamClient 1.16.5 JAR
         uses: actions/upload-artifact@v4
         with:
-          name: CreamClient-1.16.5
+          name: CreamClient-1.0-Forge-1.16.5
           path: build/libs/*.jar
