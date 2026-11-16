@@ -156,7 +156,7 @@ public final class MediaManager {
     public static void updateVolume() {
         if (activeClip != null && activeClip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
             FloatControl gain = (FloatControl) activeClip.getControl(FloatControl.Type.MASTER_GAIN);
-            float vol = ModuleManager.MUSIC_VOL != null ? ModuleManager.MUSIC_VOL.getValueFloat() : 0.45f;
+            float vol = ModuleManager.MUSIC_VOL != null ? ModuleManager.MUSIC_VOL.getFloat() : 0.45f;
             float db = (float) (Math.log10(Math.max(0.01f, vol)) * 20.0);
             gain.setValue(Math.max(gain.getMinimum(), Math.min(gain.getMaximum(), db)));
         }
