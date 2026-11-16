@@ -41,9 +41,21 @@ public class ClickGuiScreen extends Screen {
     private boolean typingProfile = false;
     private String searchQuery = "";
     private boolean typingSearch = false;
+    private final Screen parent;
 
     public ClickGuiScreen() {
+        this(null);
+    }
+
+    public ClickGuiScreen(Screen parent) {
         super(new StringTextComponent("CreamClient Control Panel"));
+        this.parent = parent;
+    }
+
+    @Override
+    public void onClose() {
+        if (minecraft != null && parent != null) minecraft.setScreen(parent);
+        else super.onClose();
     }
 
     @Override
