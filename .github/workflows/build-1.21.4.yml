@@ -1,0 +1,37 @@
+name: Build CreamClient 1.0 (Forge 1.21.4)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-1-21-4:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Setup Gradle 8.10.2
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+
+      - name: Build Forge 1.21.4 JAR
+        working-directory: port-1.21.4
+        run: gradle build --no-daemon --stacktrace
+
+      - name: Upload CreamClient 1.21.4 JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: CreamClient-1.0-Forge-1.21.4
+          path: port-1.21.4/build/libs/*.jar
