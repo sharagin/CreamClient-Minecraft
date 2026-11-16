@@ -103,24 +103,6 @@ public final class WorldVisuals {
         drawBoxOutline(ms.last().pose(), new AxisAlignedBB(pos).inflate(0.003),
                 ((accent >> 16) & 0xFF) / 255.0f, ((accent >> 8) & 0xFF) / 255.0f, (accent & 0xFF) / 255.0f, 0.92f);
 
-        if (ModuleManager.WORLD_GRID.isEnabled() && mc.player != null) {
-            double px = mc.player.xOld + (mc.player.getX() - mc.player.xOld) * partialTicks;
-            double py = mc.player.yOld + (mc.player.getY() - mc.player.yOld) * partialTicks;
-            double pz = mc.player.zOld + (mc.player.getZ() - mc.player.zOld) * partialTicks;
-            drawWorldGrid(mat, px, Math.floor(py) + 0.02, pz, r, g, b);
-        }
-
-        if (ModuleManager.PULSE_RINGS.isEnabled() && mc.player != null) {
-            double px = mc.player.xOld + (mc.player.getX() - mc.player.xOld) * partialTicks;
-            double py = mc.player.yOld + (mc.player.getY() - mc.player.yOld) * partialTicks;
-            double pz = mc.player.zOld + (mc.player.getZ() - mc.player.zOld) * partialTicks;
-            drawPulseRings(mat, px, py + 0.05, pz, r, g, b);
-        }
-
-        if (ModuleManager.WAYPOINTS.isEnabled() && mc.player != null) {
-            drawWaypoints(ms, mat, mc, partialTicks);
-        }
-
         RenderSystem.lineWidth(1.0f);
         RenderSystem.enableTexture();
         RenderSystem.disableBlend();
@@ -282,6 +264,24 @@ public final class WorldVisuals {
             RenderSystem.enableDepthTest();
         }
 
+        if (ModuleManager.WORLD_GRID.isEnabled() && mc.player != null) {
+            double px = mc.player.xOld + (mc.player.getX() - mc.player.xOld) * partialTicks;
+            double py = mc.player.yOld + (mc.player.getY() - mc.player.yOld) * partialTicks;
+            double pz = mc.player.zOld + (mc.player.getZ() - mc.player.zOld) * partialTicks;
+            drawWorldGrid(mat, px, Math.floor(py) + 0.02, pz, r, g, b);
+        }
+
+        if (ModuleManager.PULSE_RINGS.isEnabled() && mc.player != null) {
+            double px = mc.player.xOld + (mc.player.getX() - mc.player.xOld) * partialTicks;
+            double py = mc.player.yOld + (mc.player.getY() - mc.player.yOld) * partialTicks;
+            double pz = mc.player.zOld + (mc.player.getZ() - mc.player.zOld) * partialTicks;
+            drawPulseRings(mat, px, py + 0.05, pz, r, g, b);
+        }
+
+        if (ModuleManager.WAYPOINTS.isEnabled() && mc.player != null) {
+            drawWaypoints(ms, mat, mc, partialTicks);
+        }
+
         RenderSystem.lineWidth(1.0f);
         RenderSystem.enableCull();
         RenderSystem.enableTexture();
@@ -410,7 +410,7 @@ public final class WorldVisuals {
     private static class HitSpark { double x, y, z, vx, vy, vz; final long time = System.currentTimeMillis(); HitSpark(double x, double y, double z, double vx, double vy, double vz) { this.x = x; this.y = y; this.z = z; this.vx = vx; this.vy = vy; this.vz = vz; } }
     private static void drawWorldGrid(Matrix4f mat, double cx, double cy, double cz, float r, float g, float b) {
         int rad = ModuleManager.GRID_RADIUS != null ? (int) ModuleManager.GRID_RADIUS.getValue() : 6;
-        float alpha = ModuleManager.GRID_ALPHA != null ? ModuleManager.GRID_ALPHA.getValueFloat() : 0.35f;
+        float alpha = ModuleManager.GRID_ALPHA != null ? ModuleManager.GRID_ALPHA.getFloat() : 0.35f;
         float pulse = 0.7f + 0.3f * (float) Math.sin(System.currentTimeMillis() / 450.0);
         Tessellator tess = Tessellator.getInstance();
         BufferBuilder buf = tess.getBuilder();
@@ -445,7 +445,7 @@ public final class WorldVisuals {
 
     private static void drawWaypoints(MatrixStack ms, Matrix4f mat, Minecraft mc, float partialTicks) {
         String dim = WaypointManager.getCurrentDimension();
-        float beamAlpha = ModuleManager.WP_ALPHA != null ? ModuleManager.WP_ALPHA.getValueFloat() : 0.55f;
+        float beamAlpha = ModuleManager.WP_ALPHA != null ? ModuleManager.WP_ALPHA.getFloat() : 0.55f;
         RenderSystem.disableDepthTest();
         for (WaypointManager.Waypoint wp : WaypointManager.getWaypoints()) {
             if (!wp.enabled || !dim.equals(wp.dimension)) continue;
