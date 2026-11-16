@@ -182,11 +182,11 @@ public class ClickGuiScreen extends Screen {
                 if (m.getCategory() == Category.VISUALS && !n.equals("CustomSky") && !n.equals("CustomFog") && !n.equals("TimeChanger") && !n.equals("NoWeather") && !n.equals("Fullbright") && !n.equals("HandVisuals") && !n.equals("Zoom") && !n.equals("NoHurtCam") && !n.equals("Waypoints")) {
                     list.add(m);
                 }
-            } else if (tab == 4) {
+            } else if (tab == 2) {
                 if (n.equals("CustomSky") || n.equals("CustomFog") || n.equals("TimeChanger") || n.equals("NoWeather") || n.equals("Fullbright") || n.equals("BlockOverlay") || n.equals("Background")) {
                     list.add(m);
                 }
-            } else if (tab == 4) {
+            } else if (tab == 3) {
                 if (n.equals("HandVisuals") || n.equals("SmoothSwing") || n.equals("Zoom") || n.equals("NoHurtCam") || n.equals("NoFireOverlay")) {
                     list.add(m);
                 }
@@ -209,27 +209,13 @@ public class ClickGuiScreen extends Screen {
 
     private void renderTabContent(MatrixStack ms, int x, int y, int w, int h, int mx, int my, int accent) {
         if (activeTab == 1) { renderCosmeticsTab(ms, x, y, w, h, mx, my, accent); return; }
-        if (activeTab == 8) { renderMusicTab(ms, x, y, w, h, mx, my, accent); return; }
-        if (activeTab == 8) { renderColorStudioTab(ms, x, y, w, h, mx, my, accent); return; }
+        if (activeTab == 5) { renderMusicTab(ms, x, y, w, h, mx, my, accent); return; }
+        if (activeTab == 7) { renderColorStudioTab(ms, x, y, w, h, mx, my, accent); return; }
         if (activeTab == 8) { renderResourcePacksTab(ms, x, y, w, h, mx, my, accent); return; }
         if (activeTab == 10) { renderProfilesTab(ms, x, y, w, h, mx, my, accent); return; }
 
         float curY = y - scrollY;
-        if (activeTab == 1) {
-            if (hit(mouseX, mouseY, cx, bodyY, 130, 20)) { com.creamclient.visual.CosmeticManager.disableAll(); return true; }
-            float cyc = bodyY + 28 - scrollY;
-            for (com.creamclient.visual.CosmeticManager.CosmeticItem ci : com.creamclient.visual.CosmeticManager.getItems()) {
-                if (!searchQuery.isEmpty() && !ci.nameRu.toLowerCase().contains(searchQuery.toLowerCase())) continue;
-                if (hit(mouseX, mouseY, cx + cw - 78, cyc + 2, 72, 18)) {
-                    ci.enabled = !ci.enabled;
-                    com.creamclient.visual.CosmeticManager.save();
-                    return true;
-                }
-                cyc += 24;
-            }
-            return super.mouseClicked(mouseX, mouseY, button);
-        }
-        if (activeTab == 5) {
+        if (activeTab == 4) {
             if (curY >= y - 30 && curY <= y + h) {
                 drawButton(ms, x, (int) curY, 175, 22, isRu() ? "+ Добавить метку [M]" : "+ Add Waypoint [M]", mx, my, accent, true);
                 drawButton(ms, x + 182, (int) curY, 118, 22, isRu() ? "Удалить все" : "Clear All", mx, my, 0xFFFF6B6B, false);
@@ -248,7 +234,7 @@ public class ClickGuiScreen extends Screen {
             }
         }
 
-        if (activeTab == 8) {
+        if (activeTab == 6) {
             if (curY >= y - 30 && curY <= y + h) {
                 drawButton(ms, x, (int) curY, 210, 22, isRu() ? "Открыть Конструктор HUD" : "Open HUD Constructor", mx, my, accent, true);
                 drawButton(ms, x + 218, (int) curY, 120, 22, isRu() ? "Сбросить макет" : "Reset Layout", mx, my, 0xFF93A88D, false);
@@ -500,6 +486,20 @@ public class ClickGuiScreen extends Screen {
         }
 
         int bodyY = cy + 26;
+        if (activeTab == 1) {
+            if (hit(mouseX, mouseY, cx, bodyY, 130, 20)) { com.creamclient.visual.CosmeticManager.disableAll(); return true; }
+            float cyc = bodyY + 28 - scrollY;
+            for (com.creamclient.visual.CosmeticManager.CosmeticItem ci : com.creamclient.visual.CosmeticManager.getItems()) {
+                if (!searchQuery.isEmpty() && !ci.nameRu.toLowerCase().contains(searchQuery.toLowerCase())) continue;
+                if (hit(mouseX, mouseY, cx + cw - 78, cyc + 2, 72, 18)) {
+                    ci.enabled = !ci.enabled;
+                    com.creamclient.visual.CosmeticManager.save();
+                    return true;
+                }
+                cyc += 24;
+            }
+            return super.mouseClicked(mouseX, mouseY, button);
+        }
         if (activeTab == 5) {
             if (hit(mouseX, mouseY, cx + 12, bodyY + 32, cw - 24, 12)) {
                 MediaManager.seekTo((float) ((mouseX - (cx + 12)) / (double) (cw - 24)));
@@ -521,7 +521,7 @@ public class ClickGuiScreen extends Screen {
             return super.mouseClicked(mouseX, mouseY, button);
         }
 
-        if (activeTab == 8) {
+        if (activeTab == 7) {
             typingHex = hit(mouseX, mouseY, cx + 52, bodyY + 26, 86, 18);
             typingColorName = hit(mouseX, mouseY, cx + 10, bodyY + 64, 150, 18);
             if (hit(mouseX, mouseY, cx + 144, bodyY + 26, 82, 18)) {
@@ -600,7 +600,7 @@ public class ClickGuiScreen extends Screen {
         }
 
         float curY = bodyY - scrollY;
-        if (activeTab == 5) {
+        if (activeTab == 4) {
             if (hit(mouseX, mouseY, cx, curY, 175, 22)) { WaypointManager.addQuickWaypoint(); return true; }
             if (hit(mouseX, mouseY, cx + 182, curY, 118, 22)) { WaypointManager.clearAll(); return true; }
             curY += 28;
@@ -611,7 +611,7 @@ public class ClickGuiScreen extends Screen {
                 curY += 26;
             }
         }
-        if (activeTab == 8) {
+        if (activeTab == 6) {
             if (hit(mouseX, mouseY, cx, curY, 210, 22)) { minecraft.setScreen(new HudEditorScreen(this)); return true; }
             if (hit(mouseX, mouseY, cx + 218, curY, 120, 22)) { HudLayoutManager.resetDefaults(); CreamConfig.save(); return true; }
             curY += 28;
