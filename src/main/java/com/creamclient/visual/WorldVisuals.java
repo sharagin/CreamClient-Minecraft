@@ -53,35 +53,6 @@ public final class WorldVisuals {
     public static void spawnHitSparks(Entity target) {
         if (target == null) return;
         double hcx = target.getX(), hcy = target.getY() + target.getBbHeight() * 0.6, hcz = target.getZ();
-        // BlockBreathe: 2s pulsing outline on newly placed blocks
-        if (ModuleManager.BLOCK_BREATHE != null && ModuleManager.BLOCK_BREATHE.isEnabled() && !PLACED_BLOCKS.isEmpty()) {
-            long nowBp = System.currentTimeMillis();
-            PLACED_BLOCKS.entrySet().removeIf(en -> nowBp - en.getValue() > 2000L);
-            for (Map.Entry<BlockPos, Long> en : PLACED_BLOCKS.entrySet()) {
-                float age = (nowBp - en.getValue()) / 2000.0f;
-                float pulse = (float) Math.abs(Math.sin(age * Math.PI * 2.5));
-                float a = pulse * (1.0f - age) * 0.95f;
-                drawBoxOutline(mat, new AxisAlignedBB(en.getKey()).inflate(0.004 + pulse * 0.015), r, g, b, a);
-            }
-        }
-
-        // RainPuddle: sky-reflection circle under player feet
-        if (puddleAlpha > 0.01f && mc.player != null) {
-            double px = mc.player.xOld + (mc.player.getX() - mc.player.xOld) * partialTicks;
-            double py = mc.player.yOld + (mc.player.getY() - mc.player.yOld) * partialTicks;
-            double pz = mc.player.zOld + (mc.player.getZ() - mc.player.zOld) * partialTicks;
-            float shimmer = 0.85f + 0.15f * (float) Math.sin(System.currentTimeMillis() / 320.0);
-            Tessellator tess = Tessellator.getInstance();
-            BufferBuilder buf = tess.getBuilder();
-            buf.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION_COLOR);
-            buf.vertex(mat, (float) px, (float) (py + 0.02), (float) pz).color(0.55f, 0.78f, 0.98f, puddleAlpha * shimmer).endVertex();
-            for (int i = 0; i <= 28; i++) {
-                double ang = i * Math.PI * 2.0 / 28.0;
-                buf.vertex(mat, (float) (px + Math.cos(ang) * 0.95), (float) (py + 0.02), (float) (pz + Math.sin(ang) * 0.95)).color(0.35f, 0.58f, 0.85f, puddleAlpha * 0.25f).endVertex();
-            }
-            tess.end();
-        }
-
         if (ModuleManager.HIT_BUBBLES != null && ModuleManager.HIT_BUBBLES.isEnabled()) {
             HIT_BUBBLES_LIST.add(new HitBubble(hcx, hcy, hcz));
         }
@@ -130,6 +101,7 @@ public final class WorldVisuals {
             while (BREADCRUMB_LIST.size() > max) BREADCRUMB_LIST.remove(0);
         } else BREADCRUMB_LIST.clear();
 
+        long now = System.currentTimeMillis();
         // RainPuddle 5s timer
         if (ModuleManager.RAIN_PUDDLE != null && ModuleManager.RAIN_PUDDLE.isEnabled()
                 && mc.level.isRaining() && mc.level.canSeeSky(mc.player.blockPosition())) {
@@ -158,7 +130,6 @@ public final class WorldVisuals {
         }
 
         Iterator<HitSpark> it = SPARKS.iterator();
-        long now = System.currentTimeMillis();
         while (it.hasNext()) {
             HitSpark s = it.next();
             if (now - s.time > 750L) { it.remove(); continue; }
@@ -356,6 +327,35 @@ public final class WorldVisuals {
             double py = mc.player.yOld + (mc.player.getY() - mc.player.yOld) * partialTicks;
             double pz = mc.player.zOld + (mc.player.getZ() - mc.player.zOld) * partialTicks;
             drawPulseRings(mat, px, py + 0.05, pz, r, g, b);
+        }
+
+        // BlockBreathe: 2s pulsing outline on newly placed blocks
+        if (ModuleManager.BLOCK_BREATHE != null && ModuleManager.BLOCK_BREATHE.isEnabled() && !PLACED_BLOCKS.isEmpty()) {
+            long nowBp = System.currentTimeMillis();
+            PLACED_BLOCKS.entrySet().removeIf(en -> nowBp - en.getValue() > 2000L);
+            for (Map.Entry<BlockPos, Long> en : PLACED_BLOCKS.entrySet()) {
+                float age = (nowBp - en.getValue()) / 2000.0f;
+                float pulse = (float) Math.abs(Math.sin(age * Math.PI * 2.5));
+                float a = pulse * (1.0f - age) * 0.95f;
+                drawBoxOutline(mat, new AxisAlignedBB(en.getKey()).inflate(0.004 + pulse * 0.015), r, g, b, a);
+            }
+        }
+
+        // RainPuddle: sky-reflection circle under player feet
+        if (puddleAlpha > 0.01f && mc.player != null) {
+            double px = mc.player.xOld + (mc.player.getX() - mc.player.xOld) * partialTicks;
+            double py = mc.player.yOld + (mc.player.getY() - mc.player.yOld) * partialTicks;
+            double pz = mc.player.zOld + (mc.player.getZ() - mc.player.zOld) * partialTicks;
+            float shimmer = 0.85f + 0.15f * (float) Math.sin(System.currentTimeMillis() / 320.0);
+            Tessellator tess = Tessellator.getInstance();
+            BufferBuilder buf = tess.getBuilder();
+            buf.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION_COLOR);
+            buf.vertex(mat, (float) px, (float) (py + 0.02), (float) pz).color(0.55f, 0.78f, 0.98f, puddleAlpha * shimmer).endVertex();
+            for (int i = 0; i <= 28; i++) {
+                double ang = i * Math.PI * 2.0 / 28.0;
+                buf.vertex(mat, (float) (px + Math.cos(ang) * 0.95), (float) (py + 0.02), (float) (pz + Math.sin(ang) * 0.95)).color(0.35f, 0.58f, 0.85f, puddleAlpha * 0.25f).endVertex();
+            }
+            tess.end();
         }
 
         if (ModuleManager.HIT_BUBBLES != null && ModuleManager.HIT_BUBBLES.isEnabled() && !HIT_BUBBLES_LIST.isEmpty()) {
