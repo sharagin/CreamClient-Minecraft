@@ -24,7 +24,7 @@
     <a href="https://github.com/sharagin/CreamClient-Minecraft/releases">
       <img src="https://img.shields.io/github/v/release/sharagin/CreamClient-Minecraft?style=flat-square&label=Releases&color=84cc16" alt="Releases">
     </a>
-    <img src="https://img.shields.io/badge/License-MIT-65a30d?style=flat-square" alt="License">
+    <img src="https://img.shields.io/badge/License-Apache%202.0-65a30d?style=flat-square" alt="License">
   </p>
 
   <p>
