@@ -9,7 +9,7 @@ public class DiscordRPC {
     private static volatile boolean running = false;
     private static volatile String cachedDetails = "CreamClient 1.0 (1.21.4)";
     private static volatile String cachedState = "In Main Menu";
-    private static long startTime = System.currentTimeMillis() / 1000L;
+    private static final long startTime = System.currentTimeMillis() / 1000L;
 
     public static void start(String appId) {
         if (running) return;
@@ -18,7 +18,7 @@ public class DiscordRPC {
             RandomAccessFile pipe = null;
             for (int i = 0; i < 10; i++) {
                 try {
-                    pipe = new RandomAccessFile("\\.\pipe\discord-ipc-" + i, "rw");
+                    pipe = new RandomAccessFile("\\\\.\\pipe\\discord-ipc-" + i, "rw");
                     break;
                 } catch (Exception ignored) {}
             }
@@ -27,19 +27,19 @@ public class DiscordRPC {
                 return;
             }
             try {
-                sendFrame(pipe, 0, "{"v":1,"client_id":"" + appId + ""}");
+                sendFrame(pipe, 0, "{\"v\":1,\"client_id\":\"" + appId + "\"}");
                 Thread.sleep(400);
                 while (running) {
-                    String payload = "{"cmd":"SET_ACTIVITY","args":{"pid":1,"activity":{"
-                        + ""details":"" + escape(cachedDetails) + "","
-                        + ""state":"" + escape(cachedState) + "","
-                        + ""timestamps":{"start":" + startTime + "},"
-                        + ""assets":{"large_image":"logo","large_text":"CreamClient 1.0"},"
-                        + ""buttons":["
-                        + "{"label":"GitHub","url":"https://github.com/sharagin/CreamClient-Minecraft"},"
-                        + "{"label":"Download CreamClient","url":"https://github.com/sharagin/CreamClient-Minecraft/releases"}"
+                    String payload = "{\"cmd\":\"SET_ACTIVITY\",\"args\":{\"pid\":1,\"activity\":{"
+                        + "\"details\":\"" + escape(cachedDetails) + "\","
+                        + "\"state\":\"" + escape(cachedState) + "\","
+                        + "\"timestamps\":{\"start\":" + startTime + "},"
+                        + "\"assets\":{\"large_image\":\"logo\",\"large_text\":\"CreamClient 1.0\"},"
+                        + "\"buttons\":["
+                        + "{\"label\":\"Discord Server\",\"url\":\"https://discord.gg/kRNZn7Qbz\"},"
+                        + "{\"label\":\"Download CreamClient\",\"url\":\"https://github.com/sharagin/CreamClient-Minecraft/releases\"}"
                         + "]}"
-                        + "},"nonce":"" + System.nanoTime() + ""}";
+                        + "},\"nonce\":\"" + System.nanoTime() + "\"}";
                     sendFrame(pipe, 1, payload);
                     Thread.sleep(5000);
                 }
@@ -68,6 +68,6 @@ public class DiscordRPC {
     }
 
     private static String escape(String s) {
-        return s.replace("\", "\\").replace(""", "\"");
+        return s.replace("\\", "\\\\").replace("\"", "\\\"");
     }
 }
